@@ -43,6 +43,9 @@ class Main {
 						case DecafLexer.NUMBER:
 		        				type = " INTILITERAL";
 		        				break;
+						case DecafLexer.STRING:
+		        				type = " STRINGLITERAL";
+		        				break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}
