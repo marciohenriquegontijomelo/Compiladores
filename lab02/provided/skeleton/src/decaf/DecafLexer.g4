@@ -17,6 +17,35 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
+IF : 'if';
+ELSE : 'else';
+FOR : 'for';
+VOID : 'void';
+INT : 'boolean';
+BOOLEAN : 'boolean';
+BOOLEANLITERAL : 'true'|'false';
+BREAK : 'break';
+CALLOUT : 'callout';
+CLASS : 'class';
+CONTINUE : 'continue';
+RETURN : 'return';
+E : '&&';
+OU : '||';
+DEFINE : '=';
+EQ : '==';
+NEG : '!=';
+MAIOR : '>';
+MAIORIGUAL : '>=';
+MENOR : '<';
+MENORIGUAL : '<=';
+MAIS : '+';
+MENUS : '-';
+MULT : '*';
+DIV : '/';
+MOD : '%';
+COMMA : ',';
+COLON : ':';
+SEMICOLON : ';';
 
 WS_ : (' ' | '\n' ) -> skip;
 
