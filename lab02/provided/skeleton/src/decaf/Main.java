@@ -40,12 +40,15 @@ class Main {
 						case DecafLexer.INTILITERAL:
 		        				type = " INTILITERAL";
 		        				break;
-						case DecafLexer.NUMBER:
+						case DecafLexer.HEXLITERAL:
 		        				type = " INTILITERAL";
 		        				break;
 						case DecafLexer.STRING:
 		        				type = " STRINGLITERAL";
 		        				break;
+						case DecafLexer.BOOLEANLITERAL:
+		        				type = " BOOLEANLITERAL ";
+						break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}

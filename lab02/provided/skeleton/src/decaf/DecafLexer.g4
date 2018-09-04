@@ -17,20 +17,25 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-ID  : (LETRA|'_')(LETRA|NUM|'_')*;
 
 WS_ : (' ' | '\n' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-CHAR : '\'' (ESC|NUM|LETRA) '\'';
-INTILITERAL : '0x'(NUM|HEXDEC)+;
-STRING : '"'(LETRA|NUMBER|SYMBOLSTR)*'"';
-NUMBER : '-'(NUM)*;
+ID  : (LETRA|'_')(LETRA|NUM|'_')*;
+
+CHAR : '\'' (ESC|NUM|LETRA|SYMBOLCHAR) '\'';
+HEXLITERAL : '0x'(NUM|HEXDEC)+;
+STRING : '"'(LETRA|NUM|SYMBOLSTR)*'"';
+INTILITERAL : NUM(NUM)*~'x';
 
 fragment ESC :  '\\' ('n'|'t'|'\\'|'"');
 fragment NUM : ('0'..'9');
 fragment LETRA : ('a'..'z'|'A'..'Z');
 fragment HEXDEC : ('a'..'f'|'A'..'F');
-fragment SYMBOLSTR : (' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' |','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' |'@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | '\\\'' | '\t' | '"' | '\\' );
+
+fragment SYMBOLSTR :
+(' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' |','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' |'@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | '\\\'' | '\t' | '"' | '\\' );
+fragment SYMBOLCHAR :
+(' '|'!'|'#'|'$'|'%'|'&'|'('|')'|'*'|'+'|','|'-'|'.'|'/'|':'|';'|'<'|'='|'>'|'?'|'@'|'['|']'|'^'|'_'|'´'|'`'|'{'|'|'|'}'|'~');
 
