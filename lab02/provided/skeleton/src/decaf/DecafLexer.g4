@@ -27,11 +27,19 @@ BOOLEANLITERAL : 'true'|'false';
 BREAK : 'break';
 CALLOUT : 'callout';
 CLASS : 'class';
+
+PROGRAM : 'program';
+
 CONTINUE : 'continue';
 RETURN : 'return';
 E : '&&';
 OU : '||';
 DEFINE : '=';
+
+DECL : '-=';
+INC : '+=';
+INTERR : '!';
+
 EQ : '==';
 NEG : '!=';
 MAIOR : '>';
@@ -46,6 +54,13 @@ MOD : '%';
 COMMA : ',';
 COLON : ':';
 SEMICOLON : ';';
+ACOLCH: '[';
+FCOLCH: ']';
+
+PARD: ')';
+PARE: '(';
+0X: '0x';
+
 
 
 WS_ : (' ' | '\n' ) -> skip;
