@@ -11,37 +11,33 @@ options
 }
 
 
-program: CLASS PROGRAM LCURLY (field_decl)* (method_decl)* RCURLY;
 
-field_decl: ( type id | type id ACOLCH intileral FCOLCH) 
-		(COMMA (type id | type id ACOLCH intileral FCOLCH) )* SEMICOLON;
+program: CLASS PROGRAM LCURLY field_decl* method_decl* RCURLY EOF;
 
-method_decl: (type | VOID) (id) PARE (type id (COMMA (type id))* PARD block;
+field_decl: type id (COMMA type id)* SEMICOLON;
 
-block: LCURLY (var_decl)* (statement)* RCURLY;
+method_decl: (type|VOID) ID PARE (type ID (COMMA type ID)*)? PARD block;
 
-var_decl: type (id (COMMA id))* SEMICOLON;
+block: LCURLY var_decl* statement* RCURLY;
+
+var_decl: (type ID)* SEMICOLON;
 
 type: INT | BOOLEAN;
 
 statement: location assign_op expr SEMICOLON
 	| method_call SEMICOLON
-	| IF PARE expr PARD block (ELSE block)*
-	| FOR id DEFINE expr SEMICOLON expre block
-	| RETURN expr* SEMICOLON
+	| IF PARE expr PARD block (ELSE block)?
+	| FOR ID DEFINE expr COMMA expr block
+	| RETURN expr? SEMICOLON
 	| BREAK SEMICOLON
 	| CONTINUE SEMICOLON
-	| block;
+	| block ;
 
 assign_op: DEFINE | DECL | INC;
 
-method_call: method_name PARE (expr (COMMA expr))* PARD
-	| CALLOUT PARE string_literal (callout_arg (COMMA callout_arg))* PARD;
+method_call: ID PARE (expr (COMMA expr)*)? PARD | CALLOUT PARE STRING (COMMA callout_arg(COMMA callout_arg)*)? PARD;
 
-method_name: id;
-
-location: id
-	| id ACOLCH expr FCOLCH;
+location: ID | ID ACOLCH expr FCOLCH;
 
 expr: location
 	| method_call
@@ -51,7 +47,7 @@ expr: location
 	| INTERR expr
 	| PARE expr PARD;
 
-callout_arg: expr | string_literal;
+callout_arg: expr | STRING;
 
 bin_op: arith_op | rel_op | eq_op | cond_op;
 
@@ -61,31 +57,17 @@ rel_op: MAIOR | MENOR | MENORIGUAL | MAIORIGUAL;
 
 eq_op: EQ | NEG;
 
-cond_op: E | OU;
+cond_op: E|OU;
 
-literal: int_literal | char_literal | bool_literal;
+literal: int_literal | CHAR | BOOLEANLITERAL;
 
-id: alpha alpha_num*;
+int_literal: INTLITERAL | HEXLITERAL;
 
-alpha_num: alpha | digit;
+id: ID | ID ACOLCH? int_literal FCOLCH?;
 
-alpha: LETRA;
 
-digit: NUM;
 
-hex_digit: digit | HEXDEC*;
 
-int_literal: decimal_literal | hex_literal;
-
-decimal_literal: digit digit*;
-
-hex_literal: 0X hex_digit hex_digit*;
-
-bool_literal: BOOLEANLITERAL;
-
-char_literal: CHAR*;
-
-string_literal: CHAR*;
 
 
 

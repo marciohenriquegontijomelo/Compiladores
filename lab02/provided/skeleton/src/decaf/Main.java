@@ -46,18 +46,18 @@ class Main {
 						case DecafLexer.CHAR:
 		        				type = " CHARLITERAL";
 		        				break;
+						case DecafLexer.STRING:
+		        				type = " STRINGLITERAL";
+		        				break;
 						case DecafLexer.INTILITERAL:
 		        				type = " INTILITERAL";
 		        				break;
 						case DecafLexer.HEXLITERAL:
 		        				type = " INTILITERAL";
 		        				break;
-						case DecafLexer.STRING:
-		        				type = " STRINGLITERAL";
-		        				break;
 						case DecafLexer.BOOLEANLITERAL:
 		        				type = " BOOLEANLITERAL ";
-						break;
+							break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}
@@ -65,7 +65,7 @@ class Main {
         			} catch(Exception e) {
         	        	// print the error:
         	            System.out.println(CLI.infile+" "+e);
-        	            lexer.skip();
+        	            lexer.skip(); 
         	        }
         		}
         	}
@@ -94,11 +94,11 @@ class Main {
                     TreeViewer viewr = new TreeViewer(Arrays.asList(
                             parser.getRuleNames()),tree);
                     viewr.setScale(1.5);//scale a little
-                    panel.add(viewr);
+                    panel.add(viewr); 
                     frame.add(panel);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(600,400);
-                    frame.setVisible(true);
+                    frame.setVisible(true);  
                 }
 
             }

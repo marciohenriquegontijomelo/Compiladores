@@ -21,14 +21,14 @@ IF : 'if';
 ELSE : 'else';
 FOR : 'for';
 VOID : 'void';
-INT : 'boolean';
+INT : 'int';
 BOOLEAN : 'boolean';
 BOOLEANLITERAL : 'true'|'false';
 BREAK : 'break';
 CALLOUT : 'callout';
 CLASS : 'class';
 
-PROGRAM : 'program';
+PROGRAM : 'Program';
 
 CONTINUE : 'continue';
 RETURN : 'return';
@@ -59,28 +59,22 @@ FCOLCH: ']';
 
 PARD: ')';
 PARE: '(';
-0X: '0x';
 
 
-
-WS_ : (' ' | '\n' ) -> skip;
+WS_ : [ \t\r\n]+ -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-ID  : (LETRA|'_')(LETRA|NUM|'_')*;
-
-CHAR : '\'' (ESC|NUM|LETRA|SYMBOLCHAR) '\'';
-HEXLITERAL : '0x'(NUM|HEXDEC)+;
-STRING : '"'(LETRA|NUM|SYMBOLSTR)*'"';
-INTILITERAL : NUM(NUM)*~'x';
+ID  : (LETRA|'_')(LETRA|NUMBER|'_')*;
+CHAR : '\'' (ESC|LETRA|NUMBER|SYMBOLCHAR) '\'';
+STRING : '"'(LETRA|NUMBER|SYMBOLSTR)* '"';
+INTILITERAL : NUMBER(NUMBER)*;
+HEXLITERAL : '0x'(NUMBER|HEXDEC)+;
 
 fragment ESC :  '\\' ('n'|'t'|'\\'|'"');
-fragment NUM : ('0'..'9');
 fragment LETRA : ('a'..'z'|'A'..'Z');
+fragment NUMBER: ('0'..'9');
+fragment SYMBOLSTR : (' '|'!'|'"'|'#'|'$'|'%'|'&'|'\\\''|'('|')'|'*'|'+'|','|'-'|'.'|'/'|':'|';'|'<'|'='|'>'|'?'|'@'|'['|']'|'^'|'_'|'´'|'`'|'{'|'|'|'}'|'~'|'\t'|'\\'|'\"');
+fragment SYMBOLCHAR : (' '|'!'|'#'|'$'|'%'|'&'|'('|')'|'*'|'+'|','|'-'|'.'|'/'|':'|';'|'<'|'='|'>'|'?'|'@'|'['|']'|'^'|'_'|'´'|'`'|'{'|'|'|'}'|'~');
 fragment HEXDEC : ('a'..'f'|'A'..'F');
-
-fragment SYMBOLSTR :
-(' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' |','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' |'@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | '\\\'' | '\t' | '"' | '\\' );
-fragment SYMBOLCHAR :
-(' '|'!'|'#'|'$'|'%'|'&'|'('|')'|'*'|'+'|','|'-'|'.'|'/'|':'|';'|'<'|'='|'>'|'?'|'@'|'['|']'|'^'|'_'|'´'|'`'|'{'|'|'|'}'|'~');
 
