@@ -20,18 +20,18 @@ method_decl: (type|VOID) ID PARE (type ID (COMMA type ID)*)? PARD block;
 
 block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: (type ID)* SEMICOLON;
+var_decl: type ID (COMMA ID)* SEMICOLON;
 
 type: INT | BOOLEAN;
 
 statement: location assign_op expr SEMICOLON
-	| method_call SEMICOLON
-	| IF PARE expr PARD block (ELSE block)?
-	| FOR ID DEFINE expr COMMA expr block
-	| RETURN expr? SEMICOLON
-	| BREAK SEMICOLON
-	| CONTINUE SEMICOLON
-	| block ;
+    | method_call SEMICOLON
+    | IF PARE expr PARD block (ELSE block)?
+    | FOR ID DEFINE expr COMMA expr block
+    | RETURN expr? SEMICOLON
+    | BREAK SEMICOLON
+    | CONTINUE SEMICOLON
+    | block ;
 
 assign_op: DEFINE | DECL | INC;
 
@@ -40,12 +40,12 @@ method_call: ID PARE (expr (COMMA expr)*)? PARD | CALLOUT PARE STRING (COMMA cal
 location: ID | ID ACOLCH expr FCOLCH;
 
 expr: location
-	| method_call
-	| literal
-	| expr bin_op expr
-	| MENUS expr
-	| INTERR expr
-	| PARE expr PARD;
+    | method_call
+    | literal
+    | expr bin_op expr
+    | MENUS expr
+    | INTERR expr
+    | PARE expr PARD;
 
 callout_arg: expr | STRING;
 
@@ -64,10 +64,5 @@ literal: int_literal | CHAR | BOOLEANLITERAL;
 int_literal: INTLITERAL | HEXLITERAL;
 
 id: ID | ID ACOLCH? int_literal FCOLCH?;
-
-
-
-
-
 
 

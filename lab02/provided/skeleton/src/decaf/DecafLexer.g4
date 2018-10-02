@@ -1,3 +1,5 @@
+
+
 lexer grammar DecafLexer;
 
 @header {
@@ -14,8 +16,15 @@ tokens
   TK_class
 }
 
+
+
 LCURLY : '{';
 RCURLY : '}';
+ACOLCH: '[';
+FCOLCH: ']';
+
+PARD: ')';
+PARE: '(';
 
 IF : 'if';
 ELSE : 'else';
@@ -54,11 +63,7 @@ MOD : '%';
 COMMA : ',';
 COLON : ':';
 SEMICOLON : ';';
-ACOLCH: '[';
-FCOLCH: ']';
 
-PARD: ')';
-PARE: '(';
 
 
 WS_ : [ \t\r\n]+ -> skip;
@@ -68,7 +73,7 @@ SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 ID  : (LETRA|'_')(LETRA|NUMBER|'_')*;
 CHAR : '\'' (ESC|LETRA|NUMBER|SYMBOLCHAR) '\'';
 STRING : '"'(LETRA|NUMBER|SYMBOLSTR)* '"';
-INTILITERAL : NUMBER(NUMBER)*;
+INTLITERAL : NUMBER(NUMBER)*;
 HEXLITERAL : '0x'(NUMBER|HEXDEC)+;
 
 fragment ESC :  '\\' ('n'|'t'|'\\'|'"');
@@ -77,4 +82,3 @@ fragment NUMBER: ('0'..'9');
 fragment SYMBOLSTR : (' '|'!'|'"'|'#'|'$'|'%'|'&'|'\\\''|'('|')'|'*'|'+'|','|'-'|'.'|'/'|':'|';'|'<'|'='|'>'|'?'|'@'|'['|']'|'^'|'_'|'´'|'`'|'{'|'|'|'}'|'~'|'\t'|'\\'|'\"');
 fragment SYMBOLCHAR : (' '|'!'|'#'|'$'|'%'|'&'|'('|')'|'*'|'+'|','|'-'|'.'|'/'|':'|';'|'<'|'='|'>'|'?'|'@'|'['|']'|'^'|'_'|'´'|'`'|'{'|'|'|'}'|'~');
 fragment HEXDEC : ('a'..'f'|'A'..'F');
-

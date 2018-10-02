@@ -19,59 +19,59 @@ import java6035.tools.CLI.*;
 class Main {
     public static void main(String[] args) {
         try {
-        	CLI.parse (args, new String[0]);
+            CLI.parse (args, new String[0]);
 
-        	InputStream inputStream = args.length == 0 ?
+            InputStream inputStream = args.length == 0 ?
                     System.in : new java.io.FileInputStream(CLI.infile);
 
-        	if (CLI.target == CLI.SCAN)
-        	{
-        		DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
-        		Token token;
-        		boolean done = false;
-        		while (!done)
-        		{
-        			try
-        			{
-		        		for (token=lexer.nextToken(); token.getType()!=Token.EOF; token=lexer.nextToken())
-		        		{
-		        			String type = "";
-		        			String text = token.getText();
+            if (CLI.target == CLI.SCAN)
+            {
+                DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
+                Token token;
+                boolean done = false;
+                while (!done)
+                {
+                    try
+                    {
+                        for (token=lexer.nextToken(); token.getType()!=Token.EOF; token=lexer.nextToken())
+                        {
+                            String type = "";
+                            String text = token.getText();
 
-		        			switch (token.getType())
-		        			{
-						case DecafLexer.ID:
-		        				type = " IDENTIFIER";
-		        				break;
-						case DecafLexer.CHAR:
-		        				type = " CHARLITERAL";
-		        				break;
-						case DecafLexer.STRING:
-		        				type = " STRINGLITERAL";
-		        				break;
-						case DecafLexer.INTILITERAL:
-		        				type = " INTILITERAL";
-		        				break;
-						case DecafLexer.HEXLITERAL:
-		        				type = " INTILITERAL";
-		        				break;
-						case DecafLexer.BOOLEANLITERAL:
-		        				type = " BOOLEANLITERAL ";
-							break;
-		        			}
-		        			System.out.println (token.getLine() + type + " " + text);
-		        		}
-		        		done = true;
-        			} catch(Exception e) {
-        	        	// print the error:
-        	            System.out.println(CLI.infile+" "+e);
-        	            lexer.skip(); 
-        	        }
-        		}
-        	}
-        	else if (CLI.target == CLI.PARSE || CLI.target == CLI.DEFAULT)
-        	{
-        	    // Primeiro faz o parsing da cadeia
+                            switch (token.getType())
+                            {
+                        case DecafLexer.ID:
+                                type = " IDENTIFIER";
+                                break;
+                        case DecafLexer.CHAR:
+                                type = " CHARLITERAL";
+                                break;
+                        case DecafLexer.STRING:
+                                type = " STRINGLITERAL";
+                                break;
+                        case DecafLexer.INTLITERAL:
+                                type = " INTLITERAL";
+                                break;
+                        case DecafLexer.HEXLITERAL:
+                                type = " INTLITERAL";
+                                break;
+                        case DecafLexer.BOOLEANLITERAL:
+                                type = " BOOLEANLITERAL ";
+                            break;
+                            }
+                            System.out.println (token.getLine() + type + " " + text);
+                        }
+                        done = true;
+                    } catch(Exception e) {
+                        // print the error:
+                        System.out.println(CLI.infile+" "+e);
+                        lexer.skip();
+                    }
+                }
+            }
+            else if (CLI.target == CLI.PARSE || CLI.target == CLI.DEFAULT)
+            {
+                // Primeiro faz o parsing da cadeia
                 DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
                 DecafParser parser = new DecafParser(tokens);
@@ -94,20 +94,23 @@ class Main {
                     TreeViewer viewr = new TreeViewer(Arrays.asList(
                             parser.getRuleNames()),tree);
                     viewr.setScale(1.5);//scale a little
-                    panel.add(viewr); 
+                    panel.add(viewr);
                     frame.add(panel);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(600,400);
-                    frame.setVisible(true);  
+                    frame.setVisible(true); 
                 }
 
             }
-        	
+           
         } catch(Exception e) {
-        	// print the error:
+            // print the error:
             System.out.println(CLI.infile+" "+e);
         }
     }
 }
 
+	
+	
+	
 
