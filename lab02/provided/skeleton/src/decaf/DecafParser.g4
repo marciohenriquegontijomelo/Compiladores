@@ -16,7 +16,8 @@ program: CLASS PROGRAM LCURLY field_decl* method_decl* RCURLY EOF;
 
 field_decl: type id (COMMA type id)* SEMICOLON;
 
-method_decl: (type|VOID) ID PARE (type ID (COMMA type ID)*)? PARD block;
+decl: type ID;
+method_decl: (type|VOID) ID PARE (decl (COMMA decl)*)? PARD block;
 
 block: LCURLY var_decl* statement* RCURLY;
 

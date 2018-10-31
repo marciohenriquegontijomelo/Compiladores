@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -41,24 +41,21 @@ class Main {
 
 		        			switch (token.getType())
 		        			{
-								                        case 				DecafLexer.ID:
-                                type = " IDENTIFIER";
-                                break;
-                        case DecafLexer.CHAR:
-                                type = " CHARLITERAL";
-                                break;
-                        case DecafLexer.STRING:
-                                type = " STRINGLITERAL";
-                                break;
-                        case DecafLexer.INTLITERAL:
-                                type = " INTLITERAL";
-                                break;
-                        case DecafLexer.HEXLITERAL:
-                                type = " INTLITERAL";
-                                break;
-                        case DecafLexer.BOOLEANLITERAL:
-                                type = " BOOLEANLITERAL ";
-                            break;
+								case DecafLexer.IDENTIFIER:
+									type = " IDENTIFIER";
+									break;
+								case DecafLexer.CHAR_LITERAL:
+									type = " CHARLITERAL";
+									break;
+								case DecafLexer.STRING_LITERAL:
+									type = " STRINGLITERAL";
+									break;
+								case DecafLexer.INTEGER_LITERAL:
+									type = " INTLITERAL";
+									break;
+								case DecafLexer.BOOLEAN_LITERAL:
+									type = " BOOLEANLITERAL";
+									break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}
@@ -88,20 +85,17 @@ class Main {
 					//show AST in console
 					System.out.println(tree.toStringTree(parser));
 
+					//show AST in GUI
 					JFrame frame = new JFrame("Antlr AST");
 					JPanel panel = new JPanel();
-                    JScrollPane scrollPane = new JScrollPane(panel);
-                    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-                    scrollPane.setBounds(50, 30, 300, 50);
 					TreeViewer viewr = new TreeViewer(Arrays.asList(
 							parser.getRuleNames()),tree);
 					viewr.setScale(1.5);//scale a little
 					panel.add(viewr);
-					frame.add(scrollPane);
+					frame.add(panel);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setSize(600,400);
-frame.setVisible(true);
+					frame.setVisible(true);
 				}
 
 
@@ -131,18 +125,14 @@ frame.setVisible(true);
 					//show AST in GUI
 					JFrame frame = new JFrame("Antlr AST");
 					JPanel panel = new JPanel();
-                    JScrollPane scrollPane = new JScrollPane(panel);
-                    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-                    scrollPane.setBounds(50, 30, 300, 50);
 					TreeViewer viewr = new TreeViewer(Arrays.asList(
 							parser.getRuleNames()),tree);
 					viewr.setScale(1.5);//scale a little
 					panel.add(viewr);
-					frame.add(scrollPane);
+					frame.add(panel);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setSize(600,400);
-frame.setVisible(true);
+					frame.setVisible(true);
 				}
 
 			}
