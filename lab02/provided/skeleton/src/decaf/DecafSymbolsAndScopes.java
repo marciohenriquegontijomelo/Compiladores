@@ -30,6 +30,12 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
         System.out.println(globals);
     }
 
+	@Override public void enterVar_decl(DecafParser.Var_declContext ctx) { 
+	for(int i = 0; i < ctx.ID().size(); i++){
+	defineVar(ctx.type(), ctx.ID(i).getSymbol());	
+	}
+	}
+
     @Override
     public void enterMethod_decl(DecafParser.Method_declContext ctx) {
         String name = ctx.ID().getText();
